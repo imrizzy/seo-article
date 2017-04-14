@@ -1,0 +1,114 @@
+<p dir="ltr"><strong>What is a header and a sticky header</strong></p>
+
+<p dir="ltr">A sticky header is basically a menu or navigation bar that stays at the top of the page no matter where you scroll. In other words, a “fixed” header. This feature is useful for the user because they need to be able to find their way out of a page no matter where they are. Without easy access to the navigational panel, the user experience ends up being stressful and like when most things are done well, they aren’t noticed. That’s what we want. Personally, I’ve left websites when navigation options are not available or even pushes me to call the company rather than deal with their website.</p>
+<p dir="ltr">In this tutorial we’ll go over how to make a sticky header using HTML and CSS. For advanced animated effects, we’ll add some Javascript at the end. For those who don’t already know, HTML is what sets the structure of the website, CSS gives it color and traits, and Javascript adds animations and behaviors -- as explained in W3Schools &lt;<a href="https://www.w3schools.com/js/">https://www.w3schools.com/js/</a>&gt;. In terms of browser compatibility, it looks like everything in this tutorial is compatible with current browsers. A good tip of web development is to test along the way, not just after you’re done adding the coding that you think you need. Otherwise, something could go wrong and it’ll take longer to pinpoint exactly what the problem is. So let’s get to the coding and building.</p>
+<p dir="ltr"><strong>Start your HTML document</strong></p>
+<p dir="ltr">If you don’t already have an html document thrown together, don’t forget to have the proper &lt;!DOCTYPE html&gt; tag as well as &lt;head&gt; and &lt;body&gt; tags. Best practice tip: name the file “index.html” and put all the new files you will be creating into one folder, otherwise there will be problems with linking.</p>
+
+<ol>
+	<li>
+<p dir="ltr">Use a &lt;div&gt; inside a &lt;div&gt;, inside another &lt;div&gt; tag. The inside most &lt;div&gt; is for content, and the encompassing &lt;div&gt; is the content’s container.</p>
+</li>
+	<li>
+<p dir="ltr">Give the content’s parent &lt;div&gt; a class called “header”.</p>
+</li>
+	<li>
+<p dir="ltr">Add some text into the inside most &lt;div&gt; so you can watch as it follows your scroll.</p>
+</li>
+</ol>
+
+<p dir="ltr">The &lt;div&gt; tags are a standard element to use and easy to use for beginners, so why not. To learn more about &lt;div&gt; tags, check out this page: <a href="https://www.w3schools.com/tags/tag_div.asp">https://www.w3schools.com/tags/tag_div.asp</a>.</p>
+
+<pre>&lt;!DOCTYPE html&gt;
+&lt;head&gt;
+&lt;title&gt;sticky header&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div&gt;
+&lt;div&gt;
+&lt;div&gt;HEADER CONTENT&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+<p dir="ltr"><strong>Start your CSS file</strong></p>
+<p dir="ltr">A CSS file doesn’t need a particular set up other than referencing the proper element and adding styles to the corresponding elements. Best practice tip: name the file “main.css”.</p>
+
+<ol>
+	<li>
+<p dir="ltr">Refer to the &lt;div&gt; class named “header” and add attributes and values shown below.</p>
+	</li>
+	<li>
+<p dir="ltr">Add a couple attributes and values to the body that will help you see that the header is sticking. I added a patterned background pulled from &lt;<a href="http://lea.verou.me/css3patterns/">http://lea.verou.me/css3patterns/</a>&gt;. The most important part is adding the “position: fixed;” attribute and value. That’s what keeps that &lt;div&gt; stuck to the top of the window, and thus a sticky header. Adding a big number to the body’s height will allow for scrolling so you can test the functionality of the sticky header. I picked 2000px, yours can be just over 800px. Whatever that will give you a scrolling capability in your window.
+
+<pre>body {
+height: 2000px;
+margin: 0;
+background:
+radial-gradient(circle, transparent 20%, slategray 20%, slategray 80%, transparent 80%, transparent),
+radial-gradient(circle, transparent 20%, slategray 20%, slategray 80%, transparent 80%, transparent) 50px 50px,
+linear-gradient(#A8B1BB 8px, transparent 8px) 0 -4px,
+linear-gradient(90deg, #A8B1BB 8px, transparent 8px) -4px 0;
+background-color: slategray;
+background-size:100px 100px, 100px 100px, 50px 50px, 50px 50px;
+}
+
+.header {
+font-size: 30px;
+color: #FFFFFF;
+border: 1px dashed orange;
+position: fixed;
+height: 150px;
+width: 100%;
+text-align: center;
+}</pre>
+</p></li>
+<li>
+<p dir="ltr">Link to the CSS file from the HTML file using the code &lt;link rel="stylesheet" type="text/css" href="main.css"&gt; inside the &lt;head&gt; tag.</p>
+</li>
+</ol>
+
+&nbsp;
+<p dir="ltr"><strong>Animating your header with a JS file</strong></p>
+<p dir="ltr">If this is already a bit much, then no need for fancy animations. But if you want to kick it up a notch, you can try animating the header with Javascript. For a crash course in Javascript, visit &lt;<a href="https://www.w3schools.com/js/">https://www.w3schools.com/js/</a>&gt;. W3Schools is a great resource for most coding questions in general. Starting a JS file doesn’t require any particular set up either. Best practice tip: name the file “main.js”.</p>
+
+<ol>
+	<li>
+<p dir="ltr">Add the following script to the JS file. <em>Remember: this script references names that I’ve created. Adjust to your own reference names</em>
+
+<pre>
+$(window).scroll(function() {
+if ($(this).scrollTop() &gt; 1){
+$('.header').addClass('sticky');
+}
+else{
+$('.header').removeClass('sticky');
+}
+});</pre></p></li>
+
+<li><p dir="ltr">Add different CSS styling for a second state of the header into the CSS file by referencing the header by a different name, in this case “sticky”. Then add attributes and values you’d want on the header as the user scrolls down the page. Don’t forget you definitely need the “position: fixed;” attribute and value. You’ll also notice a new attribute that says “transition: all 0.4s ease;” and that’s what animates the header between the static and scrolling states. Feel free to play around with the number to see how it affects the timing of the animation.
+
+<pre>.sticky {
+font-size: 15px;
+color: #000000;
+border: 1px solid black;
+position: fixed;
+height: 50px;
+width: 100%;
+transition: all 0.4s ease;
+}</pre>
+</p>
+</li>
+<li>
+<p dir="ltr">In order for this whole animation to work, you also need to reference two JS files, one in the web and the “main.js” file. The web JS file contains all the data you need to make this header animation fancy. The order of the file links matter so keep as is.
+
+<pre>&lt;script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript" src="main.js"&gt;&lt;/script&gt;</pre></p></li>
+</ol>
+<p dir="ltr">Here are screenshots of what the sticky header will look like. A little difficult to show the transition period in screenshots but there you go!</p>
+<img alt="" src="https://lh3.googleusercontent.com/15clUr-rQwlqT2ZZ1digpoTyI-QG8QO2Wtn4Q6nMDKYkV7hAjRSudzZTmW9sPEu-L0afsZSDyAA_tubcptlFvaKeh6xNbFCX_Obty0AR4fuVMu7NZC6L7LkBDpZvnQcJJO1XW_g7" width="396" height="429" /><img alt="" src="https://lh4.googleusercontent.com/SdTDTfdOuaxfyClxzWvSW1syV-N1XBc17rQg_UYDUww2qs6SpL_3zcTs-x2m978Y0N8BTrhNOY1TuTJ6MtcuXsfMLwSNq8wwJI0N4e8wGkrlbr0PwRv-b12wPnPJbzBwbsQla2nj" width="396" height="429" />
+<p dir="ltr"><strong>Other types of sticky headers</strong></p>
+<p dir="ltr">For other great tools to learn and test coding, try <a href="http://codepen.io/">Codepen</a>. It runs the code as you type so you can see the changes without refreshing the page. You can also read other peoples’ codes and play with what they have to make it your own.</p>
+<p dir="ltr">If you want to make a sticky header that uses a visual trick, try using this Codepen &lt;<a href="http://codepen.io/mintyfloss/pen/ujtmz">http://codepen.io/mintyfloss/pen/ujtmz</a>&gt;. It uses some Javascript but very little and it takes advantage of the visual medium by creating an illusion of sorts. It looks professional and worthy of any website you might be working on. If you’re looking for more advanced-looking animations, maybe try this Codepen &lt;<a href="http://codepen.io/juicymark/pen/iHCIF">http://codepen.io/juicymark/pen/iHCIF</a>&gt;. The banner disappears gracefully as you scroll down and reappears when you’ve scrolled all the way to the top. It’s pretty great what you can create with a little coding.</p>
+<p dir="ltr"><strong>Conclusion</strong></p>
+<p dir="ltr">In conclusion, sticky headers are great for navigational help and there are fun ways to put them together. Using Javascript for the animating can seem harrowing but it does make a big difference for something to animate between states. If Javascript is stressing you out though, go with something you understand and that works. Hold functionality over design. Because when it comes down to it, it’ll be easier for you to debug when the time comes to glitches. Luckily, for a sticky header, the minimum you’d need is HTML and CSS. Hopefully this article was helpful in your adventures of being a web developer!</p>
